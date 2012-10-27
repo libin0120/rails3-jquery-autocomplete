@@ -19,7 +19,8 @@ module Rails3JQueryAutocomplete
         order   = get_autocomplete_order(method, options, model)
 
 
-        items = model.scoped
+        items = options[:cancan] ? collection : model.scoped #  Support CanCan
+        # items = model.scoped
 
         scopes.each { |scope| items = items.send(scope) } unless scopes.empty?
 
